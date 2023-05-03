@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  post_build:
+    commands:
+      - cd spring-boot-server
+      - mvn install spring-boot:repackage
+      - mv target/*.jar app.jar
+artifacts:
+  base-directory: spring-boot-server
+  files:
+    - app.jar
+    - .ebextensions/**/*
