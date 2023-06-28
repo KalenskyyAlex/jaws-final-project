@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.services.dynamodbv2.document.TableCollection;
 import com.amazonaws.services.dynamodbv2.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,30 +37,35 @@ public class TutorialDynamoDBRepository {
 		return dynamoDBMapper.load(TutorialDynamoDB.class, tutorialId);
 	}
 
-	public List<TutorialDynamoDB> getTutorialByTitel(String title) {
-
+	private List<TutorialDynamoDB> getTutorialBy(String attribute, String value){
 		PaginatedScanList<TutorialDynamoDB> tutorialList;
-		if (title == null || title == "") {
+		if (value == null || value.isEmpty()) {
 			tutorialList = dynamoDBMapper.scan(TutorialDynamoDB.class, new DynamoDBScanExpression());
 		} else {
 			DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-			scanExpression.addFilterCondition("title",
+			scanExpression.addFilterCondition(attribute,
 					new Condition().withComparisonOperator(ComparisonOperator.CONTAINS)
-							.withAttributeValueList(new AttributeValue().withS(title)));
+							.withAttributeValueList(new AttributeValue().withS(value)));
 			tutorialList = dynamoDBMapper.scan(TutorialDynamoDB.class, scanExpression);
 		}
 
 		tutorialList.loadAllResults();
-		List<TutorialDynamoDB> list = new ArrayList<TutorialDynamoDB>(tutorialList.size());
+		List<TutorialDynamoDB> list = new ArrayList<>(tutorialList.size());
 
 		Iterator<TutorialDynamoDB> iterator = tutorialList.iterator();
 		while (iterator.hasNext()) {
 			TutorialDynamoDB element = iterator.next();
 			list.add(element);
 		}
-
 		return list;
+	}
 
+	public List<TutorialDynamoDB> getTutorialByTitle(String title) {
+		return getTutorialBy("title", title);
+	}
+
+	public List<TutorialDynamoDB> getTutorialByDescription(String description) {
+		return getTutorialBy("description", description);
 	}
 
 	public String delete(String tutorialId) {
