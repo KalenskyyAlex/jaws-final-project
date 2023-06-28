@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  endpoint: '/api/tutorials'
+  endpoint: '/api/tutorials',
+  authentication: '/auth/'
 };

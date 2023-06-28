@@ -4,13 +4,16 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.bezkoder.spring.dynamodb.model.UserDynamoDB;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDynamoDBRepository {
+
+    @Autowired
     private DynamoDBMapper dynamoDBMapper;
 
-    private DynamoDB dynamoDB;
+    private final DynamoDB dynamoDB;
 
     public UserDynamoDBRepository(AmazonDynamoDB amazonDynamoDB){
         dynamoDB = new DynamoDB(amazonDynamoDB);
