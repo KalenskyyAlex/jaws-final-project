@@ -112,7 +112,7 @@ public class TutorialDynamoDBController {
 		}
 	}
 
-	@GetMapping("tutorials/{nameHash}")
+	@GetMapping("/tutorials/users/{nameHash}")
 	public ResponseEntity<List<TaskDynamoDB>> getAllTasks(@PathVariable("hashName") String nameHash) {
 		return new ResponseEntity<>(taskDynamoDBRepository.getAllTasksFromUser(nameHash), HttpStatus.OK);
 	}
