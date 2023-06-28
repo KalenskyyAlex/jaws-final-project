@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@DynamoDBTable(tableName = "tasks")
+@DynamoDBTable(tableName = "tasks")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
