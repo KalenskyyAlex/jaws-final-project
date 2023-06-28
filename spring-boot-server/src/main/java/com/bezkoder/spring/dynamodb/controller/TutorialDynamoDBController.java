@@ -2,6 +2,8 @@ package com.bezkoder.spring.dynamodb.controller;
 
 import java.util.List;
 
+import com.bezkoder.spring.dynamodb.model.TaskDynamoDB;
+import com.bezkoder.spring.dynamodb.repository.TaskDynamoDBRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,9 @@ public class TutorialDynamoDBController {
 
 	@Autowired
 	TutorialDynamoDBRepository tutorialDynamoDBRepository;
+
+	@Autowired
+	TaskDynamoDBRepository taskDynamoDBRepository;
 
 	@GetMapping("/tutorials")
 	public ResponseEntity<List<TutorialDynamoDB>> getAllTutorials(@RequestParam(required = false) String title) {
@@ -105,6 +110,11 @@ public class TutorialDynamoDBController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@GetMapping("tutorials/{nameHash}")
+	public ResponseEntity<List<TaskDynamoDB>> getAllTasks(@PathVariable("hashName") String nameHash) {
+		return new ResponseEntity<>(taskDynamoDBRepository.getAllTasksFromUser(nameHash), HttpStatus.OK);
 	}
 
 }

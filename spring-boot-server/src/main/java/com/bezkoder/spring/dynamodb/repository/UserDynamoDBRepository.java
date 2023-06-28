@@ -13,7 +13,7 @@ public class UserDynamoDBRepository {
     @Autowired
     private DynamoDBMapper dynamoDBMapper;
 
-    private final DynamoDB dynamoDB;
+    private DynamoDB dynamoDB;
 
     public UserDynamoDBRepository(AmazonDynamoDB amazonDynamoDB){
         dynamoDB = new DynamoDB(amazonDynamoDB);
