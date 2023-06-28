@@ -3,9 +3,11 @@ package com.bezkoder.spring.dynamodb.model;
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //@DynamoDBTable(tableName = "tasks")
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class TaskDynamoDB {
     @DynamoDBHashKey
