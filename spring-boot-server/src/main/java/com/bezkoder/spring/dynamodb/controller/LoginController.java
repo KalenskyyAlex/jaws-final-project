@@ -76,6 +76,6 @@ public class LoginController {
 
         userDB.save(new UserDynamoDB(nameHash, passwordHash));
 
-        return new ResponseEntity<>(ValidationResponse.Success, HttpStatus.OK);
+        return new ResponseEntity<>(ValidationResponse.Success, HttpStatus.CREATED);
     }
 }

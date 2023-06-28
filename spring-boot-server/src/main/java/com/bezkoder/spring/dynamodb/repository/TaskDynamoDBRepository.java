@@ -43,4 +43,35 @@ public class TaskDynamoDBRepository {
 
         return tasks.get(0);
     }
+
+    public TaskDynamoDB saveUserTask(String nameHash, TaskDynamoDB task){
+        TaskDynamoDB savedTask = new TaskDynamoDB(nameHash,
+                                                  task.getTitle(),
+                                                  task.getDescription(),
+                                                  task.isPublished());
+
+        dynamoDBMapper.save(savedTask);
+
+        return savedTask;
+    }
+
+    public TaskDynamoDB updateUserTask(String nameHash, String taskId, TaskDynamoDB newTask){
+        if (getTaskFromUserById(nameHash, taskId) == null) return null;
+
+        TaskDynamoDB updatedTask = new TaskDynamoDB(nameHash,
+                                                    taskId,
+                                                    newTask.getTitle(),
+                                                    newTask.getDescription(),
+                                                    newTask.isPublished(),
+                                                    newTask.isDone());
+
+        dynamoDBMapper.save(updatedTask);
+
+        return updatedTask;
+    }
+
+    public void deleteUserTask(String nameHash, String taskId){
+        TaskDynamoDB task = getTaskFromUserById(nameHash, taskId);
+        dynamoDBMapper.delete(task);
+    }
 }
