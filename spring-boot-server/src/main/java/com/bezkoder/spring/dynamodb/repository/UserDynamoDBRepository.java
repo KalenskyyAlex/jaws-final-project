@@ -24,7 +24,7 @@ public class UserDynamoDBRepository {
         return user;
     }
 
-    public UserDynamoDB getByEmailHash(String emailHash){
+    public UserDynamoDB getByNameHash(String emailHash){
         return dynamoDBMapper.load(UserDynamoDB.class, emailHash);
     }
 }

@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
 public class UserDynamoDB {
 
     @DynamoDBHashKey
-    private String userEmailHash;
+    private String userNameHash;
 
     @DynamoDBAttribute
     private String userPasswordHash;
 
     @Override
     public String toString() {
-        return "User [emailHash=" + userEmailHash + ", pwdHash=" + userPasswordHash + "]";
+        return "User [emailHash=" + userNameHash + ", pwdHash=" + userPasswordHash + "]";
     }
 
 }
