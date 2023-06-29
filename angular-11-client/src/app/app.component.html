@@ -24,7 +24,7 @@
     <div>
       <!-- <button type="button" (click)="logOut()" class="btn btn-light" *ngIf="config.storeConfig.inSystem"> -->
       <button type="button" class="btn btn-light" *ngIf="config.storeConfig.inSystem" (click)="logOut()">
-        Sign Out
+        <a routerLink="" class="nav-link">Sign Out</a>
       </button>
       <button type="button" class="btn btn-light" *ngIf="!config.storeConfig.inSystem">
         <a routerLink="auth/login" class="nav-link">Log In</a>
