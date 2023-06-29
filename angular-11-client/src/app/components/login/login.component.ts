@@ -42,8 +42,23 @@ export class LoginComponent implements OnInit {
     )
 
     if (this.loginStatus === 4) {
+      this.tutorialService.getUserHash(this.user.name)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.config.storeConfig.userHash = response;
+          },
+          error => {
+            console.log(error);
+          }
+        )
+
+      if (this.config.storeConfig.userHash === "") {
+        this.loginStatus = null;
+        return;
+      }
+      
       this.config.storeConfig.inSystem = true;
-      console.log(this.config.storeConfig.inSystem);
     }
   }
 }
