@@ -60,6 +60,11 @@ export class TutorialsListComponent implements OnInit {
     console.log(this.currentTutorial);
   }
 
+  setActiveTutorialLocal(tutorial: any, index: number): void {
+    this.currentTutorial = tutorial;
+    this.currentIndex = index;
+  }
+
   searchTitle(): void {
     this.currentTutorial = undefined;
     this.currentIndex = -1;
