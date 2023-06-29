@@ -1,1 +1,27 @@
-<p>registration-component works!</p>
+<div>
+    <div class="submit-form">
+        <div *ngIf="!registrated">
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" required [(ngModel)]="tutorial.title" name="title" />
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input class="form-control" id="description" required [(ngModel)]="tutorial.description"
+                    name="description" />
+            </div>
+
+            <button (click)="saveTutorial()" class="btn btn-success">Submit</button>
+        </div>
+
+        <div *ngIf="registrated">
+            <h4>Welcome to our ToDo-App!</h4>
+            <button class="btn btn-success">
+                <a routerLink="/tutorials" class="nav-link">TODO-LIST</a>
+            </button>
+            <p class="mt-5 mb-3 text-body-secondary">We will keep your secrets.</p>
+        </div>
+    </div>
+</div>
