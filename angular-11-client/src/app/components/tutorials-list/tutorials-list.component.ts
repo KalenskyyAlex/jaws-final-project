@@ -53,6 +53,8 @@ export class TutorialsListComponent implements OnInit {
     this.currentTutorial.done = tutorial.done;
 
     this.currentIndex = index
+
+    console.log(this.currentTutorial);
   }
 
   searchTitle(): void {
