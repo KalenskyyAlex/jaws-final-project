@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
           response => {
             console.log(response);
-            this.config.storeConfig.userHash = response;
+            this.config.storeConfig.userHash = response.userName;
           },
           error => {
             console.log(error);

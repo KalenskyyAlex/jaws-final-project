@@ -85,7 +85,7 @@ public class LoginController {
         try {
             String nameHash = getSHA256Hash(userName);
 
-            return new ResponseEntity<>(nameHash, HttpStatus.OK);
+            return new ResponseEntity<>(String.format("{\"userHash\":\"%s\"}",nameHash), HttpStatus.OK);
         }
         catch (Exception e){
             return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
