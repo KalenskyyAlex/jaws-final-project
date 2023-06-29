@@ -36,7 +36,7 @@ export class TutorialsListComponent implements OnInit {
             console.log(error);
           });
     } else {
-      this.tutorials = this.tutorialLockalService.getAll()
+      this.tutorials = this.tutorialLockalService.getAll();
     }
   }
 

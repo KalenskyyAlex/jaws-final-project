@@ -13,9 +13,15 @@ export class TutorialLockalService {
         return tutorials ? JSON.parse(tutorials) : [];
     }
 
-    get(id: string): Tutorial | undefined {
+    get(id: string): Tutorial{
         const tutorials = this.getAll();
-        return tutorials.find(tutorial => tutorial.id === id);
+        const result = tutorials.find(tutorial => tutorial.id === id);
+        if (result === undefined) {
+        return new Tutorial();
+        }
+        else {
+        return result;
+        }
     }
 
     create(data: Tutorial): void {
