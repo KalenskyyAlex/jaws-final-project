@@ -10,7 +10,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 const routes: Routes = [
   { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
   { path: 'auth/login', component: LoginComponent },
-  { path: 'auth/login/registration', component: RegistrationComponent },
+  { path: 'auth/registration', component: RegistrationComponent },
   { path: 'tutorials', component: TutorialsListComponent },
   { path: 'tutorials/:id', component: TutorialDetailsComponent },
   { path: 'add', component: AddTutorialComponent }
