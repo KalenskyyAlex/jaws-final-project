@@ -10,4 +10,5 @@ export class AppComponent {
   title = 'jAWS-tutorial';
 
   constructor(public config: ConfigStateService) { };
+  // logOut()
 }

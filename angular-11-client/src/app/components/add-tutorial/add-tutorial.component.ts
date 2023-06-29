@@ -38,8 +38,9 @@ export class AddTutorialComponent implements OnInit {
             console.log(error);
           });
     } else {
-      console.log('lockal added')
-      this.tutorialService.createLocal(data)
+      console.log('lockal added');
+      this.tutorialService.createLocal(data);
+      this.submitted = true;
     }
   }
 
