@@ -2,19 +2,13 @@ package com.bezkoder.spring.dynamodb.controller;
 
 import java.util.List;
 
+import com.amazonaws.http.HttpResponse;
 import com.bezkoder.spring.dynamodb.model.TaskDynamoDB;
 import com.bezkoder.spring.dynamodb.repository.TaskDynamoDBRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -35,6 +29,10 @@ public class TaskDynamoDBController {
 		return new ResponseEntity<>(taskDynamoDBRepository.getAllTasksFromUser(nameHash), HttpStatus.OK);
 	}
 
+	@GetMapping("/tutorials")
+	public ResponseEntity<HttpResponse> healthCheckDummy(){
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
 	@GetMapping("/tutorials/{nameHash}/{taskId}")
 	public ResponseEntity<TaskDynamoDB> getUserTaskById(@PathVariable("nameHash") String nameHash,
