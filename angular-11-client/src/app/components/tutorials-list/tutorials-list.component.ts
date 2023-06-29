@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tutorial } from 'src/app/models/tutorial.model';
 import { ConfigStateService } from 'src/app/services/config-state.service';
+import { TutorialLockalService } from 'src/app/services/lockal-tutorial.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
@@ -14,8 +15,11 @@ export class TutorialsListComponent implements OnInit {
   currentIndex = -1;
   title = '';
 
-  constructor(private tutorialService: TutorialService,
-    public config: ConfigStateService) { }
+  constructor(
+    private tutorialLockalService: TutorialLockalService,
+    private tutorialService: TutorialService,
+    public config: ConfigStateService
+  ) { }
 
   ngOnInit(): void {
     this.retrieveTutorials();
@@ -32,8 +36,7 @@ export class TutorialsListComponent implements OnInit {
             console.log(error);
           });
     } else {
-      console.log("not in system")
-      this.tutorialService.getAllLocal()
+      this.tutorials = this.tutorialLockalService.getAll()
     }
   }
 

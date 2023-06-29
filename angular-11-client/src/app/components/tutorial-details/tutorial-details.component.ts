@@ -35,7 +35,7 @@ export class TutorialDetailsComponent implements OnInit {
         },
         error => {
           console.log(error);
-        });
+    });
   }
 
   updatePublished(status: boolean): void {
