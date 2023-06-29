@@ -45,9 +45,6 @@ export class TutorialsListComponent implements OnInit {
   }
 
   setActiveTutorial(tutorial: any, index: number): void {
-    alert(tutorial.id);
-    console.log(tutorial);
-
     this.currentTutorial = new Tutorial();
     this.currentTutorial.id = tutorial.taskId;
     this.currentTutorial.title = tutorial.title;
@@ -56,7 +53,6 @@ export class TutorialsListComponent implements OnInit {
     this.currentTutorial.done = tutorial.done;
 
     this.currentIndex = index
-    console.log(this.currentTutorial);
   }
 
   searchTitle(): void {
