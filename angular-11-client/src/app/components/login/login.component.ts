@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  loginStatus = -1;
+  loginStatus = null;
 
   constructor(private tutorialService: LoginService,
     public config: ConfigStateService, private router: Router) { }
@@ -47,4 +47,5 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/tutorials']);
     }
   }
+  
 }
