@@ -44,6 +44,7 @@ export class TutorialsListComponent implements OnInit {
   }
 
   setActiveTutorial(tutorial: Tutorial, index: number): void {
+    alert(tutorial.id);
     this.currentTutorial = tutorial;
     this.currentIndex = index;
   }
