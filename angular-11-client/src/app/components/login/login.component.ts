@@ -46,6 +46,6 @@ export class LoginComponent implements OnInit {
     // }
     this.config.storeConfig.inSystem = true;
     console.log(this.config.storeConfig.inSystem);
-    // this.router.navigate(['/tutorials']);
+    this.router.navigate(['/tutorials']);
   }
 }

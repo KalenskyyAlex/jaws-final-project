@@ -38,45 +38,45 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ValidationResponse> validateLogin(@Valid @NotNull @RequestBody UserUnCiphered user) {
+    public ResponseEntity<Integer> validateLogin(@Valid @NotNull @RequestBody UserUnCiphered user) {
         String nameHash = getSHA256Hash(user.getName());
         String passwordHash = getSHA256Hash(user.getPassword());
 
         if (nameHash == null || passwordHash == null) {
-            return new ResponseEntity<>(ValidationResponse.InvalidData, HttpStatus.OK);
+            return new ResponseEntity<>(ValidationResponse.InvalidData.ordinal(), HttpStatus.OK);
         }
 
         UserDynamoDB savedUser = userDB.getByNameHash(nameHash);
 
         if (savedUser == null){
-            return new ResponseEntity<>(ValidationResponse.NoSuchUser, HttpStatus.OK);
+            return new ResponseEntity<>(ValidationResponse.NoSuchUser.ordinal(), HttpStatus.OK);
         }
 
         if (savedUser.getUserPasswordHash().equals(passwordHash)){
-            return new ResponseEntity<>(ValidationResponse.Success, HttpStatus.OK);
+            return new ResponseEntity<>(ValidationResponse.Success.ordinal(), HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(ValidationResponse.InvalidPassword, HttpStatus.OK);
+        return new ResponseEntity<>(ValidationResponse.InvalidPassword.ordinal(), HttpStatus.OK);
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<ValidationResponse> validateSignUp(@Valid @NotNull @RequestBody UserUnCiphered user){
+    public ResponseEntity<Integer> validateSignUp(@Valid @NotNull @RequestBody UserUnCiphered user){
         String nameHash = getSHA256Hash(user.getName());
         String passwordHash = getSHA256Hash(user.getPassword());
         String emailHash = getSHA256Hash(user.getEmail());
 
         if (nameHash == null || passwordHash == null || emailHash == null) {
-            return new ResponseEntity<>(ValidationResponse.InvalidData, HttpStatus.OK);
+            return new ResponseEntity<>(ValidationResponse.InvalidData.ordinal(), HttpStatus.OK);
         }
 
         UserDynamoDB savedUser = userDB.getByNameHash(nameHash);
 
         if (savedUser != null){
-            return new ResponseEntity<>(ValidationResponse.UserAlreadyExists, HttpStatus.OK);
+            return new ResponseEntity<>(ValidationResponse.UserAlreadyExists.ordinal(), HttpStatus.OK);
         }
 
         userDB.save(new UserDynamoDB(nameHash, passwordHash, emailHash));
 
-        return new ResponseEntity<>(ValidationResponse.Success, HttpStatus.CREATED);
+        return new ResponseEntity<>(ValidationResponse.Success.ordinal(), HttpStatus.CREATED);
     }
 }

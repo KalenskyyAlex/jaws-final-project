@@ -1,6 +1,6 @@
 <div>
     <div class="submit-form">
-        <!-- <div *ngIf="!config.storeConfig.inSystem"> -->
+        <div *ngIf="!config.storeConfig.inSystem">
             <h1 class="h3 mb-3 fw-normal">
                 Create new Account to use our App even better!
             </h1>
@@ -26,17 +26,17 @@
             <button (click)="submitRegister()" class="btn btn-success">
                 Registration
             </button>
-        <!-- </div> -->
+        </div>
 
-        <!-- <div *ngIf="config.storeConfig.inSystem"> -->
+        <div *ngIf="config.storeConfig.inSystem">
             <h4>Account created!</h4>
             <button class="btn btn-success">
                 <a routerLink="/tutorials" class="nav-link">TODO-LIST</a>
             </button>
-        <!-- </div> -->
+        </div>
         
-        <!-- <div *ngIf="(loginStatus !== 4)&&(loginStatus !== null)"> -->
+        <div *ngIf="(loginStatus !== 4)&&(loginStatus !== null)">
             <h4>This user exists!</h4>
-        <!-- </div> -->
+        </div>
     </div>
 </div>
