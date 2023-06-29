@@ -14,7 +14,7 @@ export class TutorialService {
     public config: ConfigStateService) { }
 
   getAll(): Observable<Tutorial[]> {
-    return this.http.get<Tutorial[]>(`${environment.endpoint}/${this.config.storeConfig.userHash}`);
+    return this.http.get<Tutorial[]>(`${environment.endpoint}/users/${this.config.storeConfig.userHash}`);
   }
 
   get(id: any): Observable<Tutorial> {
