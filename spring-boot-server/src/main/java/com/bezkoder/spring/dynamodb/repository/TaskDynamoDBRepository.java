@@ -102,7 +102,7 @@ public class TaskDynamoDBRepository {
 //
 //        return tasks.get(0);
 
-        new TaskDynamoDB();
+        return new TaskDynamoDB();
     }
 
     public TaskDynamoDB saveUserTask(String nameHash, TaskDynamoDB task){
