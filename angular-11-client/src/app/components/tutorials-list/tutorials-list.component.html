@@ -9,13 +9,19 @@
   </div>
   <div class="col-md-6">
     <h4>Todo List</h4>
-    <ul class="list-group">
+    <ul class="list-group" *ngIf="config.storeConfig.inSystem">
       <li
         class="list-group-item"
         *ngFor="let tutorial of tutorials; let i = index"
         [class.active]="i == currentIndex"
         (click)="setActiveTutorial(tutorial, i)"
       >
+        {{ tutorial.title }}
+      </li>
+    </ul>
+    <ul class="list-group" *ngIf="!config.storeConfig.inSystem">
+      <li class="list-group-item" *ngFor="let tutorial of tutorials; let i = index" [class.active]="i == currentIndex"
+        (click)="setActiveTutorial(tutorial, i)">
         {{ tutorial.title }}
       </li>
     </ul>

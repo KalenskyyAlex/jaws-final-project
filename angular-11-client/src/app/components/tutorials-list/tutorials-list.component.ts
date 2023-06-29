@@ -15,22 +15,26 @@ export class TutorialsListComponent implements OnInit {
   title = '';
 
   constructor(private tutorialService: TutorialService,
-              public config: ConfigStateService) { }
+    public config: ConfigStateService) { }
 
   ngOnInit(): void {
     this.retrieveTutorials();
   }
 
   retrieveTutorials(): void {
-    this.tutorialService.getAll()
-      .subscribe(
-        data => {
-          this.tutorials = data;
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
+    if (this.config.storeConfig.inSystem) {
+      this.tutorialService.getAll()
+        .subscribe(data => {
+            this.tutorials = data;
+            console.log(data);
+          },
+          error => {
+            console.log(error);
+          });
+    } else {
+      console.log("not in system")
+      this.tutorialService.getAllLocal()
+    }
   }
 
   refreshList(): void {
@@ -58,5 +62,4 @@ export class TutorialsListComponent implements OnInit {
           console.log(error);
         });
   }
-
 }

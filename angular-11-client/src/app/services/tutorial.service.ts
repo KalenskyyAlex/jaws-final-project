@@ -11,7 +11,7 @@ import { ConfigStateService } from './config-state.service';
 export class TutorialService {
 
   constructor(private http: HttpClient,
-              public config: ConfigStateService) { }
+    public config: ConfigStateService) { }
 
   getAll(): Observable<Tutorial[]> {
     return this.http.get<Tutorial[]>(`${environment.endpoint}/${this.config.storeConfig.userHash}`);
@@ -35,5 +35,16 @@ export class TutorialService {
 
   findByTitle(title: any): Observable<Tutorial[]> {
     return this.http.get<Tutorial[]>(`${environment.endpoint}/${this.config.storeConfig.userHash}?title=${title}`);
+  }
+
+  getAllLocal(): Tutorial[] {
+    const tutorials = localStorage.getItem('tutorials');
+    return tutorials ? JSON.parse(tutorials) : [];
+  }
+
+  createLocal(data: Tutorial): void {
+    let tutorials = this.getAllLocal();
+    tutorials.push(data);
+    localStorage.setItem('tutorials', JSON.stringify(tutorials));
   }
 }
