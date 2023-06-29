@@ -34,9 +34,6 @@ export class TutorialDetailsComponent implements OnInit {
           this.currentTutorial.description = data.description;
           this.currentTutorial.published = data.published;
           console.log(data);
-          alert(data);
-          alert(data);
-          alert(data);
         },
         error => {
           console.log(error);
