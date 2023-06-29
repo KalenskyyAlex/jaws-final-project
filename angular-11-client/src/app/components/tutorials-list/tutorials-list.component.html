@@ -17,6 +17,8 @@
         (click)="setActiveTutorial(tutorial, i)"
       >
         {{ tutorial.title }}
+        {{ tutorial.id }}
+        
       </li>
     </ul>
     <ul class="list-group" *ngIf="!config.storeConfig.inSystem">
