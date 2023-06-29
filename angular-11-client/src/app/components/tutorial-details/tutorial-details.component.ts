@@ -30,8 +30,13 @@ export class TutorialDetailsComponent implements OnInit {
     this.tutorialService.get(id)
       .subscribe(
         data => {
-          this.currentTutorial = data;
+          this.currentTutorial.title = data.title;
+          this.currentTutorial.description = data.description;
+          this.currentTutorial.published = data.published;
           console.log(data);
+          alert(data);
+          alert(data);
+          alert(data);
         },
         error => {
           console.log(error);
