@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
 import { ConfigStateService } from 'src/app/services/config-state.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   loginStatus = -1;
 
   constructor(private tutorialService: LoginService,
-              public config: ConfigStateService) { }
+    public config: ConfigStateService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -40,9 +41,11 @@ export class LoginComponent implements OnInit {
         }
     )
 
-    if (this.loginStatus === 4) {
-      this.config.storeConfig.inSystem = true;      
-    }
+    // if (this.loginStatus === 4) {
+      
+    // }
+    this.config.storeConfig.inSystem = true;
+    console.log(this.config.storeConfig.inSystem);
+    this.router.navigate(['/tutorials']);
   }
-
 }

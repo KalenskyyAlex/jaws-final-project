@@ -12,12 +12,12 @@
       </div>
     </div>
     <div>
-      <button type="button" class="btn btn-light">
-        <a routerLink="auth/login" class="nav-link">login</a>
+      <button type="button" class="btn btn-light" *ngIf="config.storeConfig.inSystem">
+        Sign Out
       </button>
-      <!-- <button>
-
-      </button> -->
+      <button type="button" class="btn btn-light" *ngIf="!config.storeConfig.inSystem">
+        <a routerLink="auth/login" class="nav-link">Log In</a>
+      </button>"
     </div>
   </nav>
 
