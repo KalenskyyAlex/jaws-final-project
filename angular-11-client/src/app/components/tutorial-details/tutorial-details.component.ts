@@ -33,7 +33,10 @@ export class TutorialDetailsComponent implements OnInit {
           this.currentTutorial.title = data.title;
           this.currentTutorial.description = data.description;
           this.currentTutorial.published = data.published;
+          this.currentTutorial.id = data.taskId;
+          this.currentTutorial.done = data.done;
           console.log(data);
+          console.log(this.currentTutorial);
         },
         error => {
           console.log(error);
