@@ -18,16 +18,16 @@ public class TaskDynamoDBController {
 	TaskDynamoDBRepository taskDynamoDBRepository;
 
 	@GetMapping("/tutorials/users/{hashName}")
-	public ResponseEntity<List<TaskDynamoDB>> getAllTasks(@PathVariable("hashName") String nameHash,
-														  @RequestParam(required = false) String title,
-														  @RequestParam(required = false) String description) {
-		if (!title.isEmpty()){
-			return new ResponseEntity<>(taskDynamoDBRepository.getTasksByTitle(nameHash, title), HttpStatus.OK);
-		}
-
-		if (!description.isEmpty()){
-			return new ResponseEntity<>(taskDynamoDBRepository.getTasksByDescription(nameHash, title), HttpStatus.OK);
-		}
+	public ResponseEntity<List<TaskDynamoDB>> getAllTasks(@PathVariable("hashName") String nameHash){
+//														  @RequestParam(required = false) String title,
+//														  @RequestParam(required = false) String description) {
+//		if (!title.isEmpty()){
+//			return new ResponseEntity<>(taskDynamoDBRepository.getTasksByTitle(nameHash, title), HttpStatus.OK);
+//		}
+//
+//		if (!description.isEmpty()){
+//			return new ResponseEntity<>(taskDynamoDBRepository.getTasksByDescription(nameHash, title), HttpStatus.OK);
+//		}
 
 		return new ResponseEntity<>(taskDynamoDBRepository.getAllTasksFromUser(nameHash), HttpStatus.OK);
 	}
