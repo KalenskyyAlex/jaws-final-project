@@ -13,7 +13,6 @@ export class TutorialsListComponent implements OnInit {
   currentTutorial?: Tutorial;
   currentIndex = -1;
   title = '';
-  tutoriall?: Tutorial;
 
   constructor(private tutorialService: TutorialService,
     public config: ConfigStateService) { }
@@ -21,7 +20,6 @@ export class TutorialsListComponent implements OnInit {
   ngOnInit(): void {
     this.retrieveTutorials();
   }
-
 
   retrieveTutorials(): void {
     if (this.config.storeConfig.inSystem) {
@@ -47,6 +45,7 @@ export class TutorialsListComponent implements OnInit {
 
   setActiveTutorial(tutorial: Tutorial, index: number): void {
     alert(tutorial.id);
+    console.log(tutorial);
     this.currentTutorial = tutorial;
     this.currentIndex = index;
   }

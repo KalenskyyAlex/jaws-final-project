@@ -13,12 +13,10 @@
       <li
         class="list-group-item"
         *ngFor="let tutorial of tutorials; let i = index"
-        [tutoriall]="tutorial"
         [class.active]="i == currentIndex"
         (click)="setActiveTutorial(tutorial, i)"
       >
-        {{ tutoriall.title }}
-        {{ tutoriall.id }}
+        {{ tutorial }}
 
       </li>
     </ul>
