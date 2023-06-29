@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { error } from 'console';
 import { User } from 'src/app/models/user.model';
 import { ConfigStateService } from 'src/app/services/config-state.service';
 import { LoginService } from 'src/app/services/login.service';
