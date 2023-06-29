@@ -29,7 +29,12 @@ export class TutorialDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.message = '';
-    this.getTutorial(this.route.snapshot.params.id);
+    if (this.config.storeConfig.inSystem){
+      this.getTutorial(this.route.snapshot.params.id);
+    }
+    else {
+      this.getTutorialLocal(this.route.snapshot.params.id);
+    }
   }
 
   getTutorial(id: string): void {
@@ -48,6 +53,23 @@ export class TutorialDetailsComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  getTutorialLocal(id: string): void {
+    if (this.config.storeConfig.inSystem) {
+      this.tutorialService.get(id)
+        .subscribe(
+          data => {
+            this.currentTutorial = data;
+            console.log(data);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    } else {
+      this.currentTutorial = this.tutorialLockalService.get(id);
+    }
   }
 
   updatePublished(status: boolean): void {
