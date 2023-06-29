@@ -17,6 +17,6 @@ export class AppComponent {
   logOut(): void {
     this.config.storeConfig.inSystem = false;
     this.config.storeConfig.userHash = "";
-    window.location.reload();
+    this.router.navigate(["/auth/login"]);
   }
 }
