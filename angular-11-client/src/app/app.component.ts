@@ -12,13 +12,11 @@ export class AppComponent {
   title = 'jAWS-tutorial';
 
   constructor(public config: ConfigStateService,
-              private router: Router,
-              private tutorialListComponent: TutorialsListComponent) { };
+              private router: Router) { };
   
   logOut(): void {
     this.config.storeConfig.inSystem = false;
     this.config.storeConfig.userHash = "";
-
-    this.tutorialListComponent.refreshList();
+    this.config.storeConfig.userName = "";
   }
 }
