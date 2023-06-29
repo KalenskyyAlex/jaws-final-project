@@ -1,6 +1,6 @@
 <div>
     <div class="submit-form">
-        <!-- <div *ngIf="!inSystem"> -->
+        <div *ngIf="!config.storeConfig.inSystem">
             <h1 class="h3 mb-3 fw-normal">Please login</h1>
 
             <div class="form-group">
@@ -20,13 +20,17 @@
             <button type="button" class="btn btn-light">
                 <a routerLink="/auth/registration" class="nav-link">registration</a>
             </button>
-        <!-- </div> -->
+        </div>
 
-        <!-- <div *ngIf="inSystem">
+        <div *ngIf="config.storeConfig.inSystem">
             <h4>You was logined successfully!</h4>
             <button class="btn btn-success">
                 <a routerLink="/tutorials" class="nav-link">TODO-LIST</a>
             </button>
-        </div> -->
+        </div>
+
+        <div *ngIf="(loginStatus !== 4)&&(loginStatus !== null)">
+            <h4>Error auntefication</h4>
+        </div>
     </div>
 </div>
