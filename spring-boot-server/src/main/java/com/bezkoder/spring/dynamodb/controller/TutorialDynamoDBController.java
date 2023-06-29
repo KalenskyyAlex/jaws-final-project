@@ -31,25 +31,6 @@ public class TutorialDynamoDBController {
 	@Autowired
 	TaskDynamoDBRepository taskDynamoDBRepository;
 
-	//legacy
-	@GetMapping("/tutorials")
-	public ResponseEntity<List<TutorialDynamoDB>> getAllTutorials(@RequestParam(required = false) String title) {
-		try {
-
-			List<TutorialDynamoDB> tutorials = tutorialDynamoDBRepository.getTutorialByTitle(title);
-			if (tutorials.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}
-
-			return new ResponseEntity<>(tutorials, HttpStatus.OK);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-	}
-
 	@GetMapping("/tutorials/users/{hashName}")
 	public ResponseEntity<List<TaskDynamoDB>> getAllTasks(@PathVariable("hashName") String nameHash) {
 //		if (!title.isEmpty()){
@@ -62,18 +43,6 @@ public class TutorialDynamoDBController {
 		return new ResponseEntity<>(taskDynamoDBRepository.getAllTasksFromUser(nameHash), HttpStatus.OK);
 	}
 
-	//legacy
-	@GetMapping("/tutorials/{id}")
-	public ResponseEntity<TutorialDynamoDB> getTutorialById(@PathVariable("id") String id) {
-
-		TutorialDynamoDB tutorial = tutorialDynamoDBRepository.getTutorialById(id);
-
-		if (tutorial != null) {
-			return new ResponseEntity<>(tutorial, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
 
 	@GetMapping("/tutorials/{nameHash}/{taskId}")
 	public ResponseEntity<TaskDynamoDB> getUserTaskById(@PathVariable("nameHash") String nameHash,
@@ -88,19 +57,6 @@ public class TutorialDynamoDBController {
 		}
 	}
 
-	//legacy
-	@PostMapping("/tutorials")
-	public ResponseEntity<TutorialDynamoDB> createTutorial(@RequestBody TutorialDynamoDB tutorial) {
-
-		try {
-			TutorialDynamoDB _tutorial = tutorialDynamoDBRepository
-					.save(new TutorialDynamoDB(tutorial.getTitle(), tutorial.getDescription(), false));
-			return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-	}
 
 	@PostMapping("/tutorials/{nameHash}")
 	public ResponseEntity<TaskDynamoDB> createUserTask(@PathVariable("nameHash") String nameHash,
@@ -115,20 +71,6 @@ public class TutorialDynamoDBController {
 		}
 	}
 
-	//legacy
-	@PutMapping("/tutorials/{id}")
-	public ResponseEntity<TutorialDynamoDB> updateTutorial(@PathVariable("id") String id,
-			@RequestBody TutorialDynamoDB tutorial) {
-
-		tutorial.setId(id);
-		TutorialDynamoDB updatedTutorial = tutorialDynamoDBRepository.update(id, tutorial);
-
-		if (updatedTutorial != null) {
-			return new ResponseEntity<>(updatedTutorial, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
 
 	@PutMapping("/tutorials/{nameHash}/{taskId}")
 	public ResponseEntity<TaskDynamoDB> updateUserTask(@PathVariable("nameHash") String nameHash,
@@ -143,19 +85,6 @@ public class TutorialDynamoDBController {
 		return new ResponseEntity<>(updatedTask, HttpStatus.OK);
 	}
 
-	//legacy
-	@DeleteMapping("/tutorials/{id}")
-	public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") String id) {
-
-		try {
-			tutorialDynamoDBRepository.delete(String.valueOf(id));
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-		catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-	}
 
 	@DeleteMapping("/tutorials/{nameHash}/{taskId}")
 	public ResponseEntity<TaskDynamoDB> deleteUserTask(@PathVariable("nameHash") String nameHash,
@@ -170,20 +99,6 @@ public class TutorialDynamoDBController {
 		}
 	}
 
-	//legacy
-	@GetMapping("/tutorials/published")
-	public ResponseEntity<List<TutorialDynamoDB>> findByPublished() {
-		try {
-			List<TutorialDynamoDB> tutorials = tutorialDynamoDBRepository.findByPublished(true);
-
-			if (tutorials.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}
-			return new ResponseEntity<>(tutorials, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
 
 	@GetMapping("/tutorials/{nameHash}/published")
 	public ResponseEntity<List<TaskDynamoDB>> findUserTaskByPublished(@PathVariable("nameHash") String nameHash) {
