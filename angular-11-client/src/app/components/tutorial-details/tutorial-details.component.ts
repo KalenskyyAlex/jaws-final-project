@@ -33,20 +33,21 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   getTutorial(id: string): void {
-    if (this.config.storeConfig.inSystem) {
-      this.tutorialService.get(id)
-        .subscribe(
-          data => {
-            this.currentTutorial = data;
-            console.log(data);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-    } else {
-      this.currentTutorial = this.tutorialLockalService.get(id);
-    }
+
+    this.tutorialService.get(id)
+      .subscribe(
+        data => {
+          this.currentTutorial.title = data.title;
+          this.currentTutorial.description = data.description;
+          this.currentTutorial.published = data.published;
+          this.currentTutorial.id = data.taskId;
+          this.currentTutorial.done = data.done;
+          console.log(data);
+          console.log(this.currentTutorial);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   updatePublished(status: boolean): void {

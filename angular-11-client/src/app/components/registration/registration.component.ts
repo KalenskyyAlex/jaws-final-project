@@ -49,7 +49,6 @@ export class RegistrationComponent implements OnInit {
           response => {
             console.log(response);
             this.config.storeConfig.userHash = response.userName;
-            alert(this.config.storeConfig.userHash);
           },
           error => {
             console.log(error);
@@ -62,6 +61,7 @@ export class RegistrationComponent implements OnInit {
       }
       
       this.config.storeConfig.inSystem = true;
+      this.config.storeConfig.userName = `${this.user.name}`;
     }
   }
   

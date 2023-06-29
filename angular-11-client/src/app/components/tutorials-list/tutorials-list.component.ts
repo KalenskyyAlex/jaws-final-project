@@ -31,6 +31,7 @@ export class TutorialsListComponent implements OnInit {
         .subscribe(data => {
             this.tutorials = data;
             console.log(data);
+            console.log(this.tutorials);
           },
           error => {
             console.log(error);
@@ -46,9 +47,17 @@ export class TutorialsListComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setActiveTutorial(tutorial: Tutorial, index: number): void {
-    this.currentTutorial = tutorial;
-    this.currentIndex = index;
+  setActiveTutorial(tutorial: any, index: number): void {
+    this.currentTutorial = new Tutorial();
+    this.currentTutorial.id = tutorial.taskId;
+    this.currentTutorial.title = tutorial.title;
+    this.currentTutorial.description = tutorial.description;
+    this.currentTutorial.published = tutorial.published;
+    this.currentTutorial.done = tutorial.done;
+
+    this.currentIndex = index
+
+    console.log(this.currentTutorial);
   }
 
   searchTitle(): void {

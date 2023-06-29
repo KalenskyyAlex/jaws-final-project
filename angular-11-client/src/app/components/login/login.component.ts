@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
       }
       
       this.config.storeConfig.inSystem = true;
+      this.config.storeConfig.userName = `${this.user.name}`;
     }
   }
 }

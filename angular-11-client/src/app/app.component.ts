@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ConfigStateService } from './services/config-state.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,12 @@ import { ConfigStateService } from './services/config-state.service';
 export class AppComponent {
   title = 'jAWS-tutorial';
 
-  constructor(public config: ConfigStateService) { };
-  // logOut()
+  constructor(public config: ConfigStateService,
+              private router: Router) { };
+  
+  logOut(): void {
+    this.config.storeConfig.inSystem = false;
+    this.config.storeConfig.userHash = "";
+    this.router.navigate(['/tutorials']);
+  }
 }
