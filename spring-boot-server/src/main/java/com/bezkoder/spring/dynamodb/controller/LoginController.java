@@ -32,8 +32,8 @@ public class LoginController {
 
             return hash;
         }
-        catch (NoSuchAlgorithmException e) {
-            return null;
+        catch (Exception e) {
+            return "";
         }
     }
 
