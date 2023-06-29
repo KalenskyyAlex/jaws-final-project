@@ -13,7 +13,7 @@
     </div>
     <div>
       <!-- <button type="button" (click)="logOut()" class="btn btn-light" *ngIf="config.storeConfig.inSystem"> -->
-      <button type="button" class="btn btn-light" *ngIf="config.storeConfig.inSystem">
+      <button type="button" class="btn btn-light" *ngIf="config.storeConfig.inSystem" (click)="logOut()">
         Sign Out
       </button>
       <button type="button" class="btn btn-light" *ngIf="!config.storeConfig.inSystem">

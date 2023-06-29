@@ -38,7 +38,6 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   getTutorial(id: string): void {
-
     this.tutorialService.get(id)
       .subscribe(
         data => {
