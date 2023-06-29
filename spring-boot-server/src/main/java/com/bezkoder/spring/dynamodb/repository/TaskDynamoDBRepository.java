@@ -1,10 +1,7 @@
 package com.bezkoder.spring.dynamodb.repository;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
@@ -14,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -92,15 +90,19 @@ public class TaskDynamoDBRepository {
     }
 
     public TaskDynamoDB getTaskFromUserById(String nameHash, String taskId){
-//        String condition = String.format(":nameHash=%s and :taskId=%s", nameHash, taskId);
-//        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-//                .withFilterExpression(condition);
-//
-//        List<TaskDynamoDB> tasks = dynamoDBMapper.scan(TaskDynamoDB.class, scanExpression);
-//
-//        if (tasks.size() != 1) return null;
-//
-//        return tasks.get(0);
+        TaskDynamoDB task = null;
+        HashMap<String, AttributeValue> compoundKey = new HashMap<>();
+
+        compoundKey.put(":v1", new AttributeValue().withS(nameHash));
+        compoundKey.put(":v2", new AttributeValue().withS(taskId));
+
+        DynamoDBQueryExpression<TaskDynamoDB> queryExp = new DynamoDBQueryExpression<TaskDynamoDB>()
+                .withKeyConditionExpression("nameHash = :v1 AND  taskId = :v2")
+                .withExpressionAttributeValues(compoundKey);
+
+        List<TaskDynamoDB> tasks = dynamoDBMapper.query(TaskDynamoDB.class, queryExp);
+
+        if (tasks.size() > 0) return tasks.get(0);
 
         return new TaskDynamoDB();
     }
