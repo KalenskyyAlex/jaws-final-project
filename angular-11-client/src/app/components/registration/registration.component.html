@@ -1,27 +1,42 @@
 <div>
     <div class="submit-form">
-        <!-- <div *ngIf="!registrated">
-
+        <div *ngIf="!config.storeConfig.inSystem">
+            <h1 class="h3 mb-3 fw-normal">
+                Create new Account to use our App even better!
+            </h1>
+            <ul>
+                <li>save your data</li>
+                <li>customer support 24/7</li>
+            </ul>
             <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" required [(ngModel)]="tutorial.title" name="title" />
+                <label for="floatinName">User name</label>
+                <input type="name" class="form-control" id="floatinName" required [(ngModel)]="user.name" />
+            </div>
+        
+            <div class="form-group">
+                <label for="floatingPassword">Email</label>
+                <input type="email" class="form-control" id="floatingEmail" required [(ngModel)]="user.email" />
             </div>
 
             <div class="form-group">
-                <label for="description">Description</label>
-                <input class="form-control" id="description" required [(ngModel)]="tutorial.description"
-                    name="description" />
+                <label for="floatingPassword">Password</label>
+                <input type="password" class="form-control" id="floatingPassword" required [(ngModel)]="user.password" />
             </div>
+        
+            <button (click)="submitRegister()" class="btn btn-success">
+                Registration
+            </button>
+        </div>
 
-            <button (click)="saveTutorial()" class="btn btn-success">Submit</button>
-        </div> -->
-
-        <!-- <div *ngIf="registrated"> -->
-            <h4>Welcome to our ToDo-App!</h4>
+        <div *ngIf="config.storeConfig.inSystem">
+            <h4>Account created!</h4>
             <button class="btn btn-success">
                 <a routerLink="/tutorials" class="nav-link">TODO-LIST</a>
             </button>
-            <p class="mt-5 mb-3 text-body-secondary">We will keep your secrets.</p>
-        <!-- </div> -->
+        </div>
+        
+        <div *ngIf="(loginStatus !== 4)&&(loginStatus !== null)">
+            <h4>This user exists!</h4>
+        </div>
     </div>
 </div>
