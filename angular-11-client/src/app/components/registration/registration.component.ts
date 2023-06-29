@@ -62,6 +62,7 @@ export class RegistrationComponent implements OnInit {
       }
       
       this.config.storeConfig.inSystem = true;
+      this.config.storeConfig.userName = `${this.user.name}`;
     }
   }
   
