@@ -14,20 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bezkoder.spring.dynamodb.model.TutorialDynamoDB;
-import com.bezkoder.spring.dynamodb.repository.TutorialDynamoDBRepository;
 
 @RestController
 @RequestMapping("/api")
-public class TutorialDynamoDBController {
-
-	// legacy
-	@Autowired
-	TutorialDynamoDBRepository tutorialDynamoDBRepository;
-
+public class TaskDynamoDBController {
 	@Autowired
 	TaskDynamoDBRepository taskDynamoDBRepository;
 
