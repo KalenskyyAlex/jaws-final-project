@@ -59,12 +59,13 @@ public class LoginController {
         return new ResponseEntity<>(ValidationResponse.InvalidPassword, HttpStatus.OK);
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/registration")
     public ResponseEntity<ValidationResponse> validateSignUp(@Valid @NotNull @RequestBody UserUnCiphered user){
         String nameHash = getSHA256Hash(user.getName());
         String passwordHash = getSHA256Hash(user.getPassword());
+        String emailHash = getSHA256Hash(user.getEmail());
 
-        if (nameHash == null || passwordHash == null) {
+        if (nameHash == null || passwordHash == null || emailHash == null) {
             return new ResponseEntity<>(ValidationResponse.InvalidData, HttpStatus.OK);
         }
 
@@ -74,7 +75,7 @@ public class LoginController {
             return new ResponseEntity<>(ValidationResponse.UserAlreadyExists, HttpStatus.OK);
         }
 
-        userDB.save(new UserDynamoDB(nameHash, passwordHash));
+        userDB.save(new UserDynamoDB(nameHash, passwordHash, emailHash));
 
         return new ResponseEntity<>(ValidationResponse.Success, HttpStatus.CREATED);
     }

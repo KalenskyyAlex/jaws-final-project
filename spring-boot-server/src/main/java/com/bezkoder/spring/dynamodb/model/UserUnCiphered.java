@@ -1,12 +1,10 @@
 package com.bezkoder.spring.dynamodb.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class UserUnCiphered {
     @Getter
     @Setter
@@ -15,4 +13,8 @@ public class UserUnCiphered {
     @Getter
     @Setter
     private String password;
+
+    @Getter
+    @Setter
+    private String email;
 }

@@ -1,4 +1,4 @@
 export class User {
-  emailHash?: string;
-  passwordHash?: string;
+  name?: string;
+  password?: string;
 }

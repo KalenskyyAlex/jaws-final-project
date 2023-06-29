@@ -54,12 +54,12 @@ public class TutorialDynamoDBController {
 	public ResponseEntity<List<TaskDynamoDB>> getAllTasks(@PathVariable("hashName") String nameHash,
 														  @RequestParam(required = false) String title,
 														  @RequestParam(required = false) String description) {
-//		if (!title.isEmpty()){
-//			return new ResponseEntity<>(taskDynamoDBRepository.getTasksByTitle());
-//		}
-//		else if (!description.isEmpty()){
-//			return new ResponseEntity<>(taskDynamoDBRepository.getTasksByDescription());
-//		}
+		if (!title.isEmpty()){
+			return new ResponseEntity<>(taskDynamoDBRepository.getTasksByTitle(nameHash, title), HttpStatus.OK);
+		}
+		else if (!description.isEmpty()){
+			return new ResponseEntity<>(taskDynamoDBRepository.getTasksByDescription(nameHash, title), HttpStatus.OK);
+		}
 
 		return new ResponseEntity<>(taskDynamoDBRepository.getAllTasksFromUser(nameHash), HttpStatus.OK);
 	}
@@ -190,8 +190,7 @@ public class TutorialDynamoDBController {
 	@GetMapping("/tutorials/{nameHash}/published")
 	public ResponseEntity<List<TaskDynamoDB>> findUserTaskByPublished(@PathVariable("nameHash") String nameHash) {
 		try {
-			// TODO
-			List<TaskDynamoDB> tasks = taskDynamoDBRepository.getAllTasksFromUser(nameHash);
+			List<TaskDynamoDB> tasks = taskDynamoDBRepository.findByPublished(nameHash, true);
 
 			if (tasks.isEmpty()) {
 				return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
