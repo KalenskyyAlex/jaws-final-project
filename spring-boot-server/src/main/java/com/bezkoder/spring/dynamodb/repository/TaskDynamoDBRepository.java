@@ -92,15 +92,17 @@ public class TaskDynamoDBRepository {
     }
 
     public TaskDynamoDB getTaskFromUserById(String nameHash, String taskId){
-        String condition = String.format(":nameHash=%s and :taskId=%s", nameHash, taskId);
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression(condition);
+//        String condition = String.format(":nameHash=%s and :taskId=%s", nameHash, taskId);
+//        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+//                .withFilterExpression(condition);
+//
+//        List<TaskDynamoDB> tasks = dynamoDBMapper.scan(TaskDynamoDB.class, scanExpression);
+//
+//        if (tasks.size() != 1) return null;
+//
+//        return tasks.get(0);
 
-        List<TaskDynamoDB> tasks = dynamoDBMapper.scan(TaskDynamoDB.class, scanExpression);
-
-        if (tasks.size() != 1) return null;
-
-        return tasks.get(0);
+        new TaskDynamoDB();
     }
 
     public TaskDynamoDB saveUserTask(String nameHash, TaskDynamoDB task){
