@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tutorial } from 'src/app/models/tutorial.model';
 import { TutorialService } from 'src/app/services/tutorial.service';
+import { TutorialLockalService } from 'src/app/services/lockal-tutorial.service';
 import { ConfigStateService } from 'src/app/services/config-state.service';
 
 
@@ -17,7 +18,11 @@ export class AddTutorialComponent implements OnInit {
   };
   submitted = false;
 
-  constructor(private tutorialService: TutorialService, public config: ConfigStateService) { }
+  constructor(
+    private tutorialLockalService: TutorialLockalService,
+    private tutorialService: TutorialService,
+    public config: ConfigStateService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +32,7 @@ export class AddTutorialComponent implements OnInit {
       title: this.tutorial.title,
       description: this.tutorial.description
     };
+
     if (this.config.storeConfig.inSystem) {
       this.tutorialService.create(data)
         .subscribe(
@@ -38,8 +44,7 @@ export class AddTutorialComponent implements OnInit {
             console.log(error);
           });
     } else {
-      console.log('lockal added');
-      this.tutorialService.createLocal(data);
+      this.tutorialLockalService.create(data);
       this.submitted = true;
     }
   }

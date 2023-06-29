@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Tutorial } from 'src/app/models/tutorial.model';
+import { TutorialLockalService } from 'src/app/services/lockal-tutorial.service';
+import { ConfigStateService } from 'src/app/services/config-state.service';
 
 @Component({
   selector: 'app-tutorial-details',
@@ -12,14 +14,18 @@ export class TutorialDetailsComponent implements OnInit {
   currentTutorial: Tutorial = {
     title: '',
     description: '',
-    published: false
+    published: false,
+    id: ''
   };
   message = '';
 
   constructor(
+    private tutorialLockalService: TutorialLockalService,
     private tutorialService: TutorialService,
+    public config: ConfigStateService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.message = '';
@@ -27,6 +33,7 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   getTutorial(id: string): void {
+
     this.tutorialService.get(id)
       .subscribe(
         data => {
