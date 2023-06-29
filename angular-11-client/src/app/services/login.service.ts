@@ -26,4 +26,8 @@ export class LoginService {
   validateRegister(data: any): Observable<any> {
     return this.http.post('/auth/registration', data);
   }
+
+  getUserHash(userName: any): Observable<any> {
+    return this.http.get(`/auth/first-get-user/${userName}`);
+  }
 }

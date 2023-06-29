@@ -32,8 +32,8 @@ public class LoginController {
 
             return hash;
         }
-        catch (NoSuchAlgorithmException e) {
-            return null;
+        catch (Exception e) {
+            return "";
         }
     }
 
@@ -78,5 +78,17 @@ public class LoginController {
         userDB.save(new UserDynamoDB(nameHash, passwordHash, emailHash));
 
         return new ResponseEntity<>(ValidationResponse.Success.ordinal(), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/first-get-user/{userName}")
+    public ResponseEntity<String> getUserHash(@PathVariable("userName") String userName){
+        try {
+            String nameHash = getSHA256Hash(userName);
+
+            return new ResponseEntity<>(nameHash, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
+        }
     }
 }
