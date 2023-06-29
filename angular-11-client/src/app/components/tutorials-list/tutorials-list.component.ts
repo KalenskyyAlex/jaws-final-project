@@ -10,7 +10,7 @@ import { TutorialService } from 'src/app/services/tutorial.service';
 })
 export class TutorialsListComponent implements OnInit {
   tutorials?: Tutorial[];
-  currentTutorial?: any;
+  currentTutorial?: Tutorial;
   currentIndex = -1;
   title = '';
 
@@ -48,6 +48,7 @@ export class TutorialsListComponent implements OnInit {
     alert(tutorial.id);
     console.log(tutorial);
 
+    this.currentTutorial = new Tutorial();
     this.currentTutorial.id = tutorial.taskId;
     this.currentTutorial.title = tutorial.title;
     this.currentTutorial.description = tutorial.description;
