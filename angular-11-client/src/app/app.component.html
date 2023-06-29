@@ -11,6 +11,16 @@
         </li>
       </div>
     </div>
+    <div class="navbar navbar-expand navbar-dark bg-dark">
+      <div class="navbar-nav mr-auto">
+        <li class="nav-item" *ngIf="config.storeConfig.inSystem">
+          <a class="navbar-brand">{{config.storeConfig.userName}}'s-TODO-LIST</a>
+        </li>
+        <li class="nav-item" *ngIf="!config.storeConfig.inSystem">
+          <a class="navbar-brand">Want to get access to all ToDo-App features? Just login or create a new Account ➤</a>
+        </li>
+      </div>
+    </div>
     <div>
       <!-- <button type="button" (click)="logOut()" class="btn btn-light" *ngIf="config.storeConfig.inSystem"> -->
       <button type="button" class="btn btn-light" *ngIf="config.storeConfig.inSystem" (click)="logOut()">

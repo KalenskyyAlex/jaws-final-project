@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ConfigStateService } from './services/config-state.service';
 import { Route, Router } from '@angular/router';
-import { platform } from 'process';
 
 @Component({
   selector: 'app-root',
