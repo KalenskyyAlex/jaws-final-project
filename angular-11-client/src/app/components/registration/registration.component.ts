@@ -45,7 +45,6 @@ export class RegistrationComponent implements OnInit {
     if (this.loginStatus === 4) {
       this.config.storeConfig.inSystem = true;
       console.log(this.config.storeConfig.inSystem);
-      this.router.navigate(['/tutorials']);
     }
   }
   
