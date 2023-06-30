@@ -77,10 +77,9 @@ export class TutorialDetailsComponent implements OnInit {
       description: this.currentTutorial.description,
       published: status
     };
-
     this.message = '';
-
-    this.tutorialService.update(this.currentTutorial.id, data)
+    if (this.config.storeConfig.inSystem) {
+      this.tutorialService.update(this.currentTutorial.id, data)
       .subscribe(
         response => {
           this.currentTutorial.published = status;
@@ -90,12 +89,16 @@ export class TutorialDetailsComponent implements OnInit {
         error => {
           console.log(error);
         });
+    } else {
+      this.tutorialLockalService.update(this.currentTutorial.id, data)
+    }
+    
   }
 
   updateTutorial(): void {
     this.message = '';
-
-    this.tutorialService.update(this.currentTutorial.id, this.currentTutorial)
+    if (this.config.storeConfig.inSystem) {
+      this.tutorialService.update(this.currentTutorial.id, this.currentTutorial)
       .subscribe(
         response => {
           console.log(response);
@@ -104,10 +107,15 @@ export class TutorialDetailsComponent implements OnInit {
         error => {
           console.log(error);
         });
+    } else {
+      this.tutorialLockalService.update(this.currentTutorial.id, this.currentTutorial);
+    }
+    
   }
 
   deleteTutorial(): void {
-    this.tutorialService.delete(this.currentTutorial.id)
+    if (this.config.storeConfig.inSystem) {
+      this.tutorialService.delete(this.currentTutorial.id)
       .subscribe(
         response => {
           console.log(response);
@@ -116,5 +124,10 @@ export class TutorialDetailsComponent implements OnInit {
         error => {
           console.log(error);
         });
+    } else {
+      this.tutorialLockalService.delete(this.currentTutorial.id);
+      this.router.navigate(['/tutorials']);
+    }
+    
   }
 }
